@@ -6,6 +6,8 @@ use Yii;
 use yii\web\Controller;
 use yii\web\Response;
 use yii\filters\VerbFilter;
+use yii\web\NotFoundHttpException;
+use yii\web\ServerErrorHttpException;
 
 use app\models\Processo;
 use app\models\Magistrado;
@@ -50,6 +52,11 @@ class ProcessoController extends Controller
     public function actionInfo($id)
     {
         $processo = Processo::findOneById($id);
+
+        if($processo == null){
+            throw new NotFoundHttpException("Processo não encontrado.");
+        }
+
         return $this->asJson($processo->asArray());
     }
 
@@ -125,7 +132,7 @@ class ProcessoController extends Controller
         } catch(\Throwable $e) {
             //Se houve algum erro, faz rollback no banco
             if($transaction != null) $transaction->rollBack();
-            throw $e;
+            throw new ServerErrorHttpException($e->getMessage());
         }
 
         //Retorna o novo processo como JSON
@@ -139,6 +146,10 @@ class ProcessoController extends Controller
     public function actionTestemunhas($id)
     {
         $processo = Processo::findOneById($id);
+
+        if($processo == null){
+            throw new NotFoundHttpException("Processo não encontrado.");
+        }
 
         $testemunhas = $processo->getTestemunas();
 
