@@ -16,7 +16,7 @@ Edwino Alberto Lopes Stein
  
 ### Banco de dados
 
-1. Criar um usuário no banco e configurar a conexão no arquivo `config/web.php`.
+1. Criar um usuário no banco e configurar a conexão no arquivo `config/db.php`.
 2. Execurar em sequencia os arquivos SQLs do diretório `bd/`
 
 ### Dependencias
