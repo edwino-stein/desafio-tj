@@ -10,3 +10,6 @@ WITH (
 
 ALTER TABLE public.pessoa_juridica
     OWNER to tj;
+
+ALTER TABLE public.pessoa_juridica
+    ADD PRIMARY KEY (id);
