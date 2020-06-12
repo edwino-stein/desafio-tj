@@ -31,4 +31,21 @@ class VaraController extends Controller
         $vara = Vara::findOneById($id);
         return $this->asJson($vara->asArray());
     }
+
+    /**
+     * Sorteia um juiz da vara
+     * Rota: GET /vara/sorteio?id={vara_id}
+     */
+    public function actionSorteio($id)
+    {
+        $vara = Vara::findOneById($id);
+        $juiz = $vara->sortearJuiz();
+
+        if($juiz == null) throw new \Exception("Não foi possivel sortear um juiz", 1);
+
+        $vara->setUltimoSorteado($juiz);
+        $vara->save();
+
+        return $this->asJson($juiz->asArray());
+    }
 }
