@@ -14,9 +14,11 @@
 
         <title><?= Html::encode($this->title) ?></title>
 
+        <link rel="stylesheet" href="/css/bootstrap.min.css" >
         <link rel="stylesheet" href="/css/font-awesome.all.min.css" >
 
         <script type="text/javascript" src="/js/jquery.min.js"></script>
+        <script type="text/javascript" src="/js/bootstrap.min.js"></script>
 
         <?php $this->head() ?>
     </head>
