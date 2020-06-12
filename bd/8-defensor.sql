@@ -16,3 +16,5 @@ WITH (
 
 ALTER TABLE public.defensor
     OWNER to tj;
+
+ALTER TABLE public.defensor DROP CONSTRAINT pessoa_fk;
