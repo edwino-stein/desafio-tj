@@ -21,3 +21,9 @@ WITH (
 
 ALTER TABLE public.testemunha
     OWNER to tj;
+
+ALTER TABLE public.testemunha
+    ADD COLUMN tipo character varying(6);
+
+ALTER TABLE public.testemunha
+    ALTER COLUMN tipo SET NOT NULL;
