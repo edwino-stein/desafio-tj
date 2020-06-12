@@ -2,9 +2,11 @@
 
 namespace app\models;
 
-use app\models\Pessoa;
-use app\models\Defensor;
 use app\models\AbstractModel;
+use app\models\Pessoa;
+use app\models\PessoaFisica;
+use app\models\PessoaJuridica;
+use app\models\Defensor;
 
 class Partes extends AbstractModel {
 
@@ -27,14 +29,22 @@ class Partes extends AbstractModel {
      * @return Pessoa
      */
     public function getAutor()
-    { return $this->hasOne(Pessoa::className(), ['id' => 'autor'])->one(); }
+    {
+        $pessoa = $this->hasOne(Pessoa::className(), ['id' => 'autor'])->one();
+        if($pessoa->getTipo() == 'fisica') return PessoaFisica::findOneById($pessoa->getId());
+        else return PessoaJuridica::findOneById($pessoa->getId());
+    }
 
     /**
      * Retorna o reu do processo
      * @return Pessoa
      */
     public function getReu()
-    { return $this->hasOne(Pessoa::className(), ['id' => 'reu'])->one(); }
+    {
+        $pessoa = $this->hasOne(Pessoa::className(), ['id' => 'reu'])->one();
+        if($pessoa->getTipo() == 'fisica') return PessoaFisica::findOneById($pessoa->getId());
+        else return PessoaJuridica::findOneById($pessoa->getId());
+    }
 
     /**
      * Retorna o advogado do autor do processo
