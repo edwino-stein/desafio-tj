@@ -33,3 +33,11 @@ WITH (
 
 ALTER TABLE public.partes
     OWNER to tj;
+
+ALTER TABLE public.partes DROP CONSTRAINT autor_fk;
+
+ALTER TABLE public.partes DROP CONSTRAINT reu;
+
+ALTER TABLE public.partes DROP CONSTRAINT reu_adv_fk;
+
+ALTER TABLE public.partes DROP CONSTRAINT autor_adv_fk;
