@@ -21,4 +21,14 @@ class VaraController extends Controller
         foreach ($varas as $v) $data[] = $v->asArray();
         return $this->asJson($data);
     }
+
+    /**
+     * Ler as informações de uma unica vara
+     * Rota: GET /vara/info?id={vara_id}
+     */
+    public function actionInfo($id)
+    {
+        $vara = Vara::findOneById($id);
+        return $this->asJson($vara->asArray());
+    }
 }
