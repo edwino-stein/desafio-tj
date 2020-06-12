@@ -18,34 +18,36 @@ class Processo extends AbstractModel {
     public static function tableName()
     { return 'processo'; }
 
-    public function __construct ($vara)
+    public function __construct ($vara = null)
     {
-        //Guarda a data de agora
-        $hoje = new \DateTime('now');
+        if($vara != null){
+            //Guarda a data de agora
+            $hoje = new \DateTime('now');
 
-        //Pega a ultima data e sequencia da vara
-        $ultimoDt = $vara->getUltimoNumeroDt();
-        $seq = $vara->getUltimoNumeroSeq() + 1;
+            //Pega a ultima data e sequencia da vara
+            $ultimoDt = $vara->getUltimoNumeroDt();
+            $seq = $vara->getUltimoNumeroSeq() + 1;
 
-        //Se as datas forem diferentes, reinicia a sequencia
-        if($hoje->format('Y-m-d') != $ultimoDt->format('Y-m-d')) $seq = 0;
+            //Se as datas forem diferentes, reinicia a sequencia
+            if($hoje->format('Y-m-d') != $ultimoDt->format('Y-m-d')) $seq = 0;
 
-        //Gera o número do processo
-        //Padrão: VVVVVYYYYMMDDSSSSSSS
-        //VVVVV = id da vara com zeros a esquerda
-        //YYYYMMDD = data com ano, mes e dia
-        //SSSSSSS = sequencia com zeros a esquerda
-        $novoNumero = str_pad($vara->getId(), 5, "0", STR_PAD_LEFT);
-        $novoNumero .= $hoje->format('Ymd');
-        $novoNumero .= str_pad($seq, 7, "0", STR_PAD_LEFT);
+            //Gera o número do processo
+            //Padrão: VVVVVYYYYMMDDSSSSSSS
+            //VVVVV = id da vara com zeros a esquerda
+            //YYYYMMDD = data com ano, mes e dia
+            //SSSSSSS = sequencia com zeros a esquerda
+            $novoNumero = str_pad($vara->getId(), 5, "0", STR_PAD_LEFT);
+            $novoNumero .= $hoje->format('Ymd');
+            $novoNumero .= str_pad($seq, 7, "0", STR_PAD_LEFT);
 
-        //Define os atributos do processo
-        $this->setAttribute('numero', $novoNumero);
-        $this->setAttribute('distribuicao', $hoje->format('Y-m-d'));
+            //Define os atributos do processo
+            $this->setAttribute('numero', $novoNumero);
+            $this->setAttribute('distribuicao', $hoje->format('Y-m-d'));
 
-        //Atualiza a vara
-        $vara->setUltimoNumeroDt($hoje);
-        $vara->setUltimoNumeroSeq($seq);
+            //Atualiza a vara
+            $vara->setUltimoNumeroDt($hoje);
+            $vara->setUltimoNumeroSeq($seq);
+        }
     }
 
     /**
