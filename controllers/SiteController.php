@@ -25,4 +25,13 @@ class SiteController extends Controller
     {
         return $this->render('index');
     }
+
+    /**
+     * Tela para visualizar um processo em detalhes
+     * Rota: /site/verprocesso?id={processo_id}
+     */
+    public function actionVerprocesso()
+    {
+        return $this->render('verprocesso');
+    }
 }
