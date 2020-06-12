@@ -131,4 +131,20 @@ class ProcessoController extends Controller
         //Retorna o novo processo como JSON
         return $this->asJson($processo->asArray());
     }
+
+    /**
+     * Lista de todas as testemunhas de um processo
+     * rota: GET /processo/testemulhas?id={processo_id}
+     */
+    public function actionTestemunhas($id)
+    {
+        $processo = Processo::findOneById($id);
+
+        $testemunhas = $processo->getTestemunas();
+
+        $arary = [];
+        foreach ($testemunhas as $t) $array[] = $t->asArray();
+
+        return $this->asJson($array);
+    }
 }

@@ -73,6 +73,11 @@ class Testemunha extends AbstractModel {
         return $this;
     }
 
+    public static function findByProcesso($processo)
+    {
+        return Self::find()->where(['processo' => $processo->getId()])->all();
+    }
+
     public static function parseTestemunhas($d)
     {
         $testemunhas = [];

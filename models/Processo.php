@@ -6,6 +6,7 @@ use app\models\AbstractModel;
 use app\models\Magistrado;
 use app\models\Orgao;
 use app\models\Partes;
+use app\models\Testemunha;
 use yii\helpers\ArrayHelper;
 
 class Processo extends AbstractModel {
@@ -187,6 +188,10 @@ class Processo extends AbstractModel {
         return $this;
     }
 
+    public function getTestemunas()
+    {
+        return Testemunha::findByProcesso($this);
+    }
 
     public function getResumo(): array
     {
