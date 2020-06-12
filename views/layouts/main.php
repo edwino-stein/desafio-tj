@@ -16,6 +16,8 @@
 
         <link rel="stylesheet" href="/css/font-awesome.all.min.css" >
 
+        <script type="text/javascript" src="/js/jquery.min.js"></script>
+
         <?php $this->head() ?>
     </head>
     <body>
