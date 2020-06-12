@@ -25,4 +25,14 @@ class ProcessoController extends Controller
 
         return $this->asJson($data);
     }
+
+    /**
+     * Ler todos os dados de um processo
+     * Rota: GET /processo/info?id={processo_id}
+     */
+    public function actionInfo($id)
+    {
+        $processo = Processo::findOneById($id);
+        return $this->asJson($processo->asArray());
+    }
 }
